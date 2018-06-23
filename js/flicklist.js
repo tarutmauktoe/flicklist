@@ -2,8 +2,7 @@
 
 var model = {
   watchlistItems: [],
-  browseItems: [],
-  delbrowseItems: []
+  browseItems: []
 }
 
 
@@ -52,15 +51,13 @@ function render() {
     let para = $("<p></p>").text(movie.title);
     let listitem = $("<li></li>").append(para);
     $("#section-watchlist ul").append(listitem);
-  });
-  
-  // remove movie on the current browse list that appears in watchlist
-  model.delbrowseItems.forEach(function(toDelMovie) {
-    model.browseItems = model.browseItems.filter(function(movie) {
-      return movie.title != toDelMovie.title;
+
+    // remove movie on the current browse list that appears in watchlist
+    model.browseItems = model.browseItems.filter(function(browseMovie) {
+      return movie.title != browseMovie.title;
     });
   });
-
+  
   // for each movie on the current browse list, 
   model.browseItems.forEach(function(movie) {
 		// insert a list item into the <ul> in the browse section
@@ -75,7 +72,6 @@ function render() {
 		// when the button is clicked, this movie should be added to the model's watchlist and render() should be called again
     button.click(function() {
       model.watchlistItems.push(movie);
-      model.delbrowseItems.push(movie);
       render();
     });
   });
